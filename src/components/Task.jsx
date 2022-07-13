@@ -1,27 +1,27 @@
-import React, { Component } from 'react'
-import PropTypes  from 'prop-types';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
 
 export default class Task extends Component {
-    constructor(){
-        super();
+  constructor() {
+    super();
 
-        this.state = {};
-    }
+    this.state = {};
+  }
+
   render() {
     const { data } = this.props;
     const { title } = data;
     return (
       <div>
         <input type="checkbox" />
-          {title}
+        {title}
         <button type="button">Remover</button>
       </div>
     );
   }
 }
-Task.PropTypes = {
-    data: PropTypes.shape({
-      title: PropTypes.string,
-    }),
-
+Task.propTypes = {
+  data: PropTypes.shape({
+    title: PropTypes.string,
+  }),
 }.isRequired;
