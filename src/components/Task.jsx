@@ -27,12 +27,12 @@ export default class Task extends Component {
   }
 
   render() {
-    const { hasFinished } = this.state;
-    const { data, onRemove } = this.props;
+    //const { hasFinished } = this.state;
+    const { data, onRemove, hasFinished} = this.props;
     const { id, title } = data;
     return (
       <div>
-        <input type="checkbox" onChange={this.handleCheckbox} checked={hasFinished}/>
+        <input type="checkbox" onChange={this.handleCheckbox}  checked={hasFinished}/>
         {title}
         <button type="button" onClick={ () => onRemove(id)}>
           Remover
@@ -48,4 +48,5 @@ Task.propTypes = {
   }),
   onUpdate: PropTypes.func,
   onRemove: PropTypes.func,
+  hasFinished: PropTypes.bool,
 }.isRequired;

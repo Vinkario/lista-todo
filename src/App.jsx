@@ -14,13 +14,27 @@ class App extends Component {
     this.removeTask = this.removeTask.bind(this);
   }
 
+  componentDidMount() {
+    this.loadTasksFromLocalStorage();
+  }
+
+  loadTasksFromLocalStorage() {
+    let localStorageTasks = localStorage.getItem("tasks");
+    console.log(localStorageTasks)
+    localStorageTasks = JSON.parse(localStorageTasks);
+    this.setState({
+      tasks: localStorageTasks || [],
+    });
+  }
+
   createTask(newTask) {
     const { tasks } = this.state;
-    updatedTasks = [...tasks, newTask];
+    const updatedTasks = [...tasks, newTask];
     this.setState({
-      tasks: this.updateTasks,
+      tasks: updatedTasks,
     });
-    localStorage.setItem("tasks", JSON.stringfy(tasks));
+
+    localStorage.setItem("tasks", JSON.stringify(updatedTasks));
   }
 
   updateTask(updatedTask) {
@@ -35,6 +49,8 @@ class App extends Component {
     this.setState({
       tasks: updatedTasks,
     });
+
+    localStorage.setItem('tasks', JSON.stringify(updatedTasks));
   }
 
   removeTask(id) {
@@ -43,6 +59,7 @@ class App extends Component {
     this.setState({
       tasks: updatedTasks,
     });
+    localStorage.setItem('tasks',JSON.stringify (updatedTasks));
   }
 
   render() {
@@ -56,6 +73,7 @@ class App extends Component {
             data={task}
             onUpdate={this.updateTask}
             onRemove={this.removeTask}
+           hasFinished = {task.hasFinished}
           />
         ))}
       </>
